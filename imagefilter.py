@@ -22,8 +22,8 @@ def main():
     new_image.putpixel((50, 50), (r, g, b))
 
     for x in range(width):
-	    for y in range(height):
-		    r,g,b = image.getpixel((x,y))
+        for y in range(height):
+            r,g,b = image.getpixel((x,y))
             new_image.putpixel((x,y), (math.floor(r/2), math.floor(g/2), math.floor(b/2)))
 
     # open the new image
