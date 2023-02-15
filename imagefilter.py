@@ -35,8 +35,6 @@ def main():
              
     if grayscale_question[0] == "n":
             sys.exit()
-gray=0.299red+0.587green+0.114
-
 
 if __name__ == "__main__":
     main()
