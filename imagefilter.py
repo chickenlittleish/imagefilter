@@ -38,7 +38,7 @@ def main():
             for x in range(width):
                 for y in range(height):
                     r,g,b = image.getpixel((x,y))
-                    new_image2.putpixel((x,y), (math.floor(0.299*r), math.floor(0.587*g), math.floor(0.144*b))) 
+                    new_image2.putpixel((x,y), (math.floor(r/3), math.floor(g/3), math.floor(b/3)))
             new_image2.show()
     if grayscale_question[0] == "n":
             sys.exit()
