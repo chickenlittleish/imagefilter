@@ -43,7 +43,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-     # open the new image
-    new_image.show()
