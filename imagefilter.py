@@ -37,7 +37,6 @@ def main():
                     r,g,b = image.getpixel((x,y))
                     new_image.putpixel((x,y), (math.floor(0.299+r), math.floor(0.587+g), math.floor(0.144+b)))
                     new_image.show()
-
     if grayscale_question[0] == "n":
             sys.exit()
 
