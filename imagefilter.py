@@ -18,9 +18,12 @@ def main():
     
     # create a new image of the same size as the original
     new_image = Image.new("RGB", (image.size), "white")
+    new_image2 = Image.new("RGB", (image.size), "white")
+
 
     # place a pixel from the original image into the new image
     new_image.putpixel((50, 50), (r, g, b))
+    new_image2.putpixel((50, 50), (r, g, b))
 
     grayscale_question = input("Would you like to grayscale your photo?")
     if grayscale_question[0] == "y":
@@ -30,13 +33,13 @@ def main():
                 for y in range(height):
                     r,g,b = image.getpixel((x,y))
                     new_image.putpixel((x,y), (math.floor(r+g+b/3)))
-                    new_image.show()
+            new_image.show()
         if grayscale_type == "2" or "method 2": 
-             for x in range(width):
+            for x in range(width):
                 for y in range(height):
                     r,g,b = image.getpixel((x,y))
-                    new_image.putpixel((x,y), (math.floor(0.299+r), math.floor(0.587+g), math.floor(0.144+b)))
-                    new_image.show()
+                    new_image2.putpixel((x,y), (math.floor(0.299*r), math.floor(0.587*g), math.floor(0.144*b))) 
+            new_image2.show()
     if grayscale_question[0] == "n":
             sys.exit()
 
