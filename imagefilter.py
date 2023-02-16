@@ -31,14 +31,16 @@ def main():
         if grayscale_type == "1" or "method 1":
             for x in range(width):
                 for y in range(height):
+                    gray = int((r + g + b)/3)
                     r,g,b = image.getpixel((x,y))
-                    new_image.putpixel((x,y), (math.floor(r+g+b/3)))
+                    new_image.putpixel((x,y), (gray,gray,gray))
             new_image.show()
         if grayscale_type == "2" or "method 2": 
             for x in range(width):
                 for y in range(height):
+                    gray = int((0.299*r + 0.587*g + 0.114*b)/3)
                     r,g,b = image.getpixel((x,y))
-                    new_image2.putpixel((x,y), (math.floor(r/3), math.floor(g/3), math.floor(b/3)))
+                    new_image.putpixel((x,y), (gray,gray,gray))
             new_image2.show()
     if grayscale_question[0] == "n":
             sys.exit()
