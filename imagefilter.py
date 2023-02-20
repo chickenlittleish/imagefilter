@@ -40,7 +40,7 @@ def main():
                 for y in range(height):
                     gray = int((0.299*r + 0.587*g + 0.114*b)/3)
                     r,g,b = image.getpixel((x,y))
-                    new_image.putpixel((x,y), (gray,gray,gray))
+                    new_image2.putpixel((x,y), (gray,gray,gray))
             new_image2.show()
     if grayscale_question[0] == "n":
             sys.exit()
