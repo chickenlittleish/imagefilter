@@ -41,11 +41,14 @@ def main():
             vertical.show()
     if question.lower() == "shrink":
         shrink_question = int(input("by how much would you like to shrink your image\n"))
-        shrunk_width = width // shrink_question
-        shrunk_height = height // shrink_question
+        shrunk_width = int(width // shrink_question)
+        shrunk_height = int(height // shrink_question)
         shrunk_image = ((shrunk_width, shrunk_height))
-        shrunk_image.save('my_new_favorite_image.jpg')
-        shrunk_image.show()
+        for new_width in range(1, shrunk_width):
+            for new_height in range(1, shrunk_height):
+                new_image[new_width, new_height] = image[50 + new_width, 50 + new_height]
+                new_image.save('new.jpg',new_image)
+                new_image.show()
     #if question.lower() == "hide":
 
 if __name__ == "__main__":
