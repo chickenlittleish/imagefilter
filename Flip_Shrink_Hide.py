@@ -59,9 +59,9 @@ def main():
                     b = (bin(b)[2:6])
                     unfiltered_binary_character = bin(ord(character))
                     filtered_binary_character = ((unfiltered_binary_character)[2:6])
-                    hidden_r = r + filtered_binary_character
-                    hidden_g = g + filtered_binary_character
-                    hidden_b = b + filtered_binary_character
+                    hidden_r = int(r + filtered_binary_character)
+                    hidden_g = int(g + filtered_binary_character)
+                    hidden_b = int(b + filtered_binary_character)
                     new_image.putpixel((x,y), (hidden_r,hidden_g,hidden_b))
         new_image.show()
         
