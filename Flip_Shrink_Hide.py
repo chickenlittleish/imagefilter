@@ -39,17 +39,31 @@ def main():
         if flip_question.lower() == "vertical":
             vertical = image.transpose(Image.FLIP_TOP_BOTTOM)
             vertical.show()
-    if question.lower() == "shrink":
-        shrink_question = int(input("by how much would you like to shrink your image\n"))
-        shrunk_width = int(width // shrink_question)
-        shrunk_height = int(height // shrink_question)
-        shrunk_image = ((shrunk_width, shrunk_height))
-        for new_width in range(1, shrunk_width):
-            for new_height in range(1, shrunk_height):
-                new_image[new_width, new_height] = image[50 + new_width, 50 + new_height]
-                new_image.save('new.jpg',new_image)
-                new_image.show()
-    #if question.lower() == "hide":
+    #if question.lower() == "shrink":
+        #shrink_question = int(input("by how much would you like to shrink your image\n"))
+        #shrunk_width = int(width // shrink_question)
+        #shrunk_height = int(height // shrink_question)
+        #shrunk_image = ((shrunk_width, shrunk_height))
+        #for new_width in range(1, shrunk_width):
+            #for new_height in range(1, shrunk_height):
+                #new_image[new_width, new_height] = image[50 + new_width, 50 + new_height]
+                #new_image.save('new.jpg',new_image)
+                #new_image.show()
+    if question.lower() == "hide":
+            red_binary = str(bin(r)[2:])
+            green_binary = str(bin(g)[2:])
+            blue_binary = str(bin(b)[2:])
+            while len(red_binary) < 8:
+                new_red_binary = red_binary + "0"
+            while len(blue_binary) < 8:
+                new_blue_binary = blue_binary + "0"
+            while len(green_binary) < 8:
+                new_green_binary = green_binary + "0"
+            
+            print(bin(new_red_binary))
+            print(bin(new_blue_binary))
+            print(bin(new_green_binary))
+    
 
 if __name__ == "__main__":
     main()
