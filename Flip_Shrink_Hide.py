@@ -8,7 +8,7 @@ def main():
     image = Image.open('jump.jpeg')
 
     # Show image
-    image.show()
+    #image.show()
 
     # get the height and width
     width, height = image.size
@@ -18,12 +18,10 @@ def main():
     
     # create a new image of the same size as the original
     new_image = Image.new("RGB", (image.size), "white")
-    new_image2 = Image.new("RGB", (image.size), "white")
 
 
     # place a pixel from the original image into the new image
     new_image.putpixel((50, 50), (r, g, b))
-    new_image2.putpixel((50, 50), (r, g, b))
 
     question_identity = input("How would you like to be addressed?\n")
     print("Would you like to Flip, Shrink, or Hide your photo?")
@@ -50,22 +48,23 @@ def main():
                 #new_image.save('new.jpg',new_image)
                 #new_image.show()
     if question.lower() == "hide":
-            red_binary = str(bin(r)[2:])
-            green_binary = str(bin(g)[2:])
-            blue_binary = str(bin(b)[2:])
-            while len(red_binary) < 8:
-                new_red_binary = red_binary + "0"
-            while len(blue_binary) < 8:
-                new_blue_binary = blue_binary + "0"
-            while len(green_binary) < 8:
-                new_green_binary = green_binary + "0"
-            
-            print(bin(new_red_binary))
-            print(bin(new_blue_binary))
-            print(bin(new_green_binary))
-    
-
+        secret_message = input("what is your secret message?\n")
+        split_message = ([*secret_message])
+        for character in split_message:
+            for x in range(width):
+                for y in range(height):
+                    r,g,b = image.getpixel((x,y))
+                    r = (bin(r)[2:6])
+                    g = (bin(g)[2:6])
+                    b = (bin(b)[2:6])
+                    unfiltered_binary_character = bin(ord(character))
+                    filtered_binary_character = ((unfiltered_binary_character)[2:6])
+                    hidden_r = r + filtered_binary_character
+                    hidden_g = g + filtered_binary_character
+                    hidden_b = b + filtered_binary_character
+                    new_image.putpixel((x,y), (hidden_r,hidden_g,hidden_b))
+        new_image.show()
+        
+                           
 if __name__ == "__main__":
     main()
-
-
