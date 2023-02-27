@@ -54,13 +54,20 @@ def main():
                     r,g,b = image.getpixel((x,y))
                     r = (bin(r)[2:6])
                     g = (bin(g)[2:6])
-                    b = (bin(b)[2:6])
+                    b = b
                     unfiltered_binary_character = bin(ord(character))
-                    filtered_binary_character = ((unfiltered_binary_character)[2:6])
-                    hidden_r = int(r + filtered_binary_character)
-                    hidden_g = int(g + filtered_binary_character)
-                    hidden_b = int(b + filtered_binary_character)
-                    new_image.putpixel((x,y), (hidden_r,hidden_g,hidden_b))
+                    first_half_filtered_binary_character = ((unfiltered_binary_character)[2:6])
+                    second_half_filtered_binary_character = ((unfiltered_binary_character)[7:10])
+                    hidden_r = int(r + first_half_filtered_binary_character)
+                    hidden_g = int(g + second_half_filtered_binary_character)
+                    print(hidden_r)
+                    print(hidden_g)
+                    new_image.putpixel((x,y), (hidden_r,hidden_g,b))
+                    if character == split_message[-1]:
+                        for x in range(width):
+                            for y in range(height):
+                                r,g,b = image.getpixel((x,y))
+                                new_image.putpixel((x,y), (r,g,b))
         new_image.show()
 
 
