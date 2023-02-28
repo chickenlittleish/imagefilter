@@ -60,14 +60,16 @@ def main():
                     second_half_filtered_binary_character = ((unfiltered_binary_character)[7:10])
                     hidden_r = int(r + first_half_filtered_binary_character)
                     hidden_g = int(g + second_half_filtered_binary_character)
-                    print(hidden_r)
-                    print(hidden_g)
                     new_image.putpixel((x,y), (hidden_r,hidden_g,b))
-                    if character == split_message[-1]:
-                        for x in range(width):
-                            for y in range(height):
-                                r,g,b = image.getpixel((x,y))
-                                new_image.putpixel((x,y), (r,g,b))
+                    #print(hidden_r)
+                    #print(hidden_g)
+                    #x+1
+                    #y+1
+        if character == split_message[-1]:
+            for x in range(width):
+                for y in range(height):
+                    r,g,b = image.getpixel((x,y))
+                    new_image.putpixel((x,y), (r,g,b))
         new_image.show()
 
 
