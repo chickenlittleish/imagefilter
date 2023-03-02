@@ -3,7 +3,10 @@ from PIL import Image
 import math
 import sys
 
-def flip():
+def flip(image,question_identity):
+    width, height = image.size
+    r, g, b = image.getpixel((50, 50))
+    new_image = Image.new("RGB", (image.size), "white")
     print("Dear " +question_identity+ ", would you like to flip your image vertically or horizontally?")
     print("Your options are: Horizontal/Vertical")
     flip_question = input("")
@@ -14,8 +17,11 @@ def flip():
         vertical = image.transpose(Image.FLIP_TOP_BOTTOM)
         vertical.show()
 
-def shrink():
-    shrink_question = int(input("by how much would you like to shrink your image\n"))
+def shrink(image,question_identity):
+    width, height = image.size
+    r, g, b = image.getpixel((50, 50))
+    new_image = Image.new("RGB", (image.size), "white")
+    shrink_question = int(input(+question_identity+ "by how much would you like to shrink your image\n"))
     shrunk_width = int(width // shrink_question)
     shrunk_height = int(height // shrink_question)
     shrunk_image = ((shrunk_width, shrunk_height))
@@ -25,12 +31,12 @@ def shrink():
             new_image.save('new.jpg',new_image)
             new_image.show()
 
-def hide(image):
+def hide(image,question_identity):
     width, height = image.size
     r, g, b = image.getpixel((50, 50))
     new_image = Image.new("RGB", (image.size), "white")
-    user_choice = input("Do you want to hide an image or a message?\n")
-    user_choice == "message":
+    choice_of_hide = input(+question_identity+ "Do you want to hide an image or a message?\n")
+    if choice_of_hide == "message":
         secret_message = input("what is your secret message?\n")
         split_message = ([*secret_message])
         for character in split_message:
@@ -56,7 +62,7 @@ def hide(image):
                     r,g,b = image.getpixel((x,y))
                     new_image.putpixel((x,y), (r,g,b))
         new_image.show()
-    user_choice == "image" or "photo":
+    if choice_of_hide == "image" or "phot":
 
 
 def main():
@@ -85,11 +91,11 @@ def main():
     print("Your options are: Flip/Shrink/Hide")
     question = input("")
     if question.lower() == "flip":
-        flip()
+        flip(image,question_identity)
     if question.lower() == "shrink":
-        shrink()
+        shrink(image,question_identity)
     if question.lower() == "hide":
-        hide(image)
+        hide(image,question_identity)
 
 if __name__ == "__main__":
     main()
