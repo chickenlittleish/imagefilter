@@ -45,7 +45,7 @@ def hide(image,question_identity):
                     r,g,b = image.getpixel((x,y))
                     r = (bin(r)[2:6])
                     g = (bin(g)[2:6])
-                    b = b
+                    b = int(bin(b)[2:6])
                     unfiltered_binary_character = bin(ord(character))
                     first_half_filtered_binary_character = ((unfiltered_binary_character)[2:6])
                     second_half_filtered_binary_character = ((unfiltered_binary_character)[7:10])
@@ -62,7 +62,7 @@ def hide(image,question_identity):
                     r,g,b = image.getpixel((x,y))
                     new_image.putpixel((x,y), (r,g,b))
         new_image.show()
-    if choice_of_hide == "image" or "phot":
+    if choice_of_hide == "image" or "photo":
 
 
 def main():
