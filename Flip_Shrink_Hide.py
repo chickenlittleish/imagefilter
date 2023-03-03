@@ -21,7 +21,7 @@ def shrink(image,question_identity):
     width, height = image.size
     r, g, b = image.getpixel((50, 50))
     new_image = Image.new("RGB", (image.size), "white")
-    shrink_question = int(input(+question_identity+ "by how much would you like to shrink your image\n"))
+    shrink_question = int(input(question_identity+ ", by how much would you like to shrink your image\n"))
     shrunk_width = int(width // shrink_question)
     shrunk_height = int(height // shrink_question)
     shrunk_image = ((shrunk_width, shrunk_height))
@@ -34,14 +34,14 @@ def shrink(image,question_identity):
 def hide(image,question_identity):
     width, height = image.size
     r, g, b = image.getpixel((50, 50))
-    new_image = Image.new("RGB", (image.size), "white")
-    choice_of_hide = input(+question_identity+ "Do you want to hide an image or a message?\n")
+    new_image2 = Image.new("RGB", (image.size), "white")
+    choice_of_hide = input(question_identity+ " Do you want to hide an image or a message?\n")
     if choice_of_hide == "message":
         secret_message = input("what is your secret message?\n")
         split_message = ([*secret_message])
-        for character in split_message:
-            for x in range(width):
-                for y in range(height):
+        for x in range(width):
+            for y in range(height):
+                for character in split_message:
                     r,g,b = image.getpixel((x,y))
                     r = (bin(r)[2:6])
                     g = (bin(g)[2:6])
@@ -51,18 +51,14 @@ def hide(image,question_identity):
                     second_half_filtered_binary_character = ((unfiltered_binary_character)[7:10])
                     hidden_r = int(r + first_half_filtered_binary_character)
                     hidden_g = int(g + second_half_filtered_binary_character)
-                    new_image.putpixel((x,y), (hidden_r,hidden_g,b))
-                    #print(hidden_r)
-                    #print(hidden_g)
-                    #x+1
-                    #y+1
-        if character == split_message[-1]:
-            for x in range(width):
-                for y in range(height):
-                    r,g,b = image.getpixel((x,y))
-                    new_image.putpixel((x,y), (r,g,b))
-        new_image.show()
-    if choice_of_hide == "image" or "photo":
+                    new_image2.putpixel((x,y), (hidden_r,hidden_g,b))
+                    if character == split_message[-1]:
+                        for x in range(width):
+                            for y in range(height):
+                                r,g,b = image.getpixel((x,y))
+                                new_image2.putpixel((x,y), (r,g,b))
+                    #new_image2.show()
+    #if choice_of_hide == "image" or "photo":
 
 
 def main():
