@@ -39,6 +39,7 @@ def hide(image,question_identity):
     #the image size tells it it's the same image size as the original image,
     # the white tells it the image is pure white before we put the pixels)
     new_image2 = Image.new("RGB", (image.size), "white")
+    new_image_3 = Image.new("RGB", (image.size), "white")
     #asks the user if they want to hide a message or an image
     choice_of_hide = input(question_identity+ " Do you want to hide an image or a message?\n")
     #if they choose to hide a message, it will run the program for hiding a message
@@ -88,7 +89,36 @@ def hide(image,question_identity):
                         new_image2.show()
                         #exit the system
                         sys.exit()
-    #if choice_of_hide == "image" or "photo":
+    if choice_of_hide == "image" or "photo":
+        print("What is your secret image/photo?")
+        print("Choices are:\nhorse.jpg\nbuster.png\nhyena.jpg\nkitty.png\nlatestart.jpg\nnightbee.png\nowlbear.jpg\nphilip.jpg\nthanksgiving.jpg")
+        secret_image = input("What is your secret image/photo?(Choose from the list)\n")
+        image2 = Image.open(secret_image)
+        image2.show()
+        width2, height2 = image2.size
+        for x in range(width):
+            for y in range(height):
+                for x2 in range(width2):
+                    for y2 in range(height2):
+                        r,g,b = image.getpixel((x,y))
+                        r2,g2,b2 = image2.getpixel((x2,y2))
+                        r = (bin(r)[2:6])
+                        g = (bin(g)[2:6])
+                        b = (bin(b)[2:6])
+                        r2 = (bin(r2)[2:6])
+                        g2 = (bin(g2)[2:6])
+                        b2 = (bin(b2)[2:6])
+                        hidden_r = int(r + r2)
+                        hidden_g = int(g + g2)
+                        hidden_b = int(b + b2)
+                        new_image_3.putpixel((x,y), (hidden_r,hidden_g,hidden_b))
+                        if str(x2) == (str(width2)[-1]) and str(y2) == (str(height2)[-1]):
+                            for x in range(width):
+                                for y in range(height):
+                                    r,g,b = image.getpixel((x,y))
+                                    new_image_3.putpixel((x,y), (r,g,b))
+                            new_image_3.show()
+                            sys.exit()
 
 
 def main():
