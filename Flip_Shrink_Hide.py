@@ -44,6 +44,7 @@ def hide(image,question_identity):
     choice_of_hide = input(question_identity+ " Do you want to hide an image or a message?\n")
     #if they choose to hide a message, it will run the program for hiding a message
     if choice_of_hide == "message":
+        image.show()
         #it will ask for a message to hide
         secret_message = input("what is your secret message?\n")
         #it splits the message into indvidual characters using the unpack method
