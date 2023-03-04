@@ -2,6 +2,7 @@
 from PIL import Image
 import math
 import sys
+import time
 
 def flip(image,question_identity):
     width, height = image.size
@@ -41,10 +42,9 @@ def hide(image,question_identity):
     new_image2 = Image.new("RGB", (image.size), "white")
     new_image_3 = Image.new("RGB", (image.size), "white")
     #asks the user if they want to hide a message or an image
-    choice_of_hide = input(question_identity+ " Do you want to hide an image or a message?\n")
+    choice_of_hide = input(question_identity+ ", do you want to hide an image or a message?\n")
     #if they choose to hide a message, it will run the program for hiding a message
     if choice_of_hide == "message":
-        image.show()
         #it will ask for a message to hide
         secret_message = input("what is your secret message?\n")
         #it splits the message into indvidual characters using the unpack method
@@ -123,27 +123,16 @@ def hide(image,question_identity):
 
 
 def main():
-    # Open image
-    image = Image.open('jump.jpeg')
-
-    # Show image
-    #image.show()
-
-    # get the height and width
-    width, height = image.size
-
-    # get the rgb values of a pixel at a certain coordinate
-    r, g, b = image.getpixel((50, 50))
-    
-    # create a new image of the same size as the original
-    new_image = Image.new("RGB", (image.size), "white")
-
-
-    # place a pixel from the original image into the new image
-    new_image.putpixel((50, 50), (r, g, b))
-
-
     question_identity = input("How would you like to be addressed?\n")
+    print("What image would you like to use?")
+    print("Choices are:\nhorse.jpg\nbuster.png\nhyena.jpg\nkitty.png\nlatestart.jpg\nnightbee.png\nowlbear.jpg\nphilip.jpg\nthanksgiving.jpg")
+    main_image = input("What is your secret image/photo?(Choose from the list)\n")
+    # Open image
+    image = Image.open(main_image)
+    print("This is your image:")
+    time.sleep(2)
+    image.show()
+    time.sleep(2)
     print("Would you like to Flip, Shrink, or Hide your photo?")
     print("Your options are: Flip/Shrink/Hide")
     question = input("")
