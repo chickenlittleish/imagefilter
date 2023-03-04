@@ -32,32 +32,62 @@ def shrink(image,question_identity):
             new_image.show()
 
 def hide(image,question_identity):
+    #gets width and height based on image we give
     width, height = image.size
-    r, g, b = image.getpixel((50, 50))
+    #creates a blank new image
+    #(the RGB tells it it's in RGB format(in color basically),
+    #the image size tells it it's the same image size as the original image,
+    # the white tells it the image is pure white before we put the pixels)
     new_image2 = Image.new("RGB", (image.size), "white")
+    #asks the user if they want to hide a message or an image
     choice_of_hide = input(question_identity+ " Do you want to hide an image or a message?\n")
+    #if they choose to hide a message, it will run the program for hiding a message
     if choice_of_hide == "message":
+        #it will ask for a message to hide
         secret_message = input("what is your secret message?\n")
+        #it splits the message into indvidual characters using the unpack method
         split_message = ([*secret_message])
+        #gets the width
         for x in range(width):
+            #gets the height
             for y in range(height):
+                #gets the character for that pixel(width and height)
                 for character in split_message:
+                    #gets the RGB vales of that pixel
                     r,g,b = image.getpixel((x,y))
+                    #makes the R value of RGB into binary and only keeps the first 4 which hold the most value in binary(As the first 4 values are the largest numbers in binary)
                     r = (bin(r)[2:6])
+                    #makes the G value of RGB into binary and only keeps the first 4
                     g = (bin(g)[2:6])
-                    b = int(bin(b)[2:6])
+                    #do nothing with the B value of RGB as we'll explain later
+                    b = b
+                    #convert the character into binary(so 8 values)
                     unfiltered_binary_character = bin(ord(character))
+                    #split the character's binary sequence into the 4 first binary values
                     first_half_filtered_binary_character = ((unfiltered_binary_character)[2:6])
+                    #split the character's binary sequence into the 4 last binary values
                     second_half_filtered_binary_character = ((unfiltered_binary_character)[7:10])
+                    #add the first 4 binary values to the binary values of R(as we have 4 left after keeping only the first 4 values)
                     hidden_r = int(r + first_half_filtered_binary_character)
+                    #add the last 4 binary values to the binary values of G(as we have 4 left after keeping only the first 4 values)
                     hidden_g = int(g + second_half_filtered_binary_character)
+                    #we don't need blue(b/B) as the binary sequence of the character only has 8 values so we only need 8 spaces which are provided by R and G
+                    #place the new RGB values in the new image in the same position
                     new_image2.putpixel((x,y), (hidden_r,hidden_g,b))
+                    #if we reach the final character(which is -1)
                     if character == split_message[-1]:
+                        #get the width
                         for x in range(width):
+                            #get the height
                             for y in range(height):
+                                #get the RGB value of that pixel(width and heigh)
                                 r,g,b = image.getpixel((x,y))
+                                #place those RGB values in the same position in the new image
                                 new_image2.putpixel((x,y), (r,g,b))
-                    #new_image2.show()
+                        #print/show the new image
+                        new_image2.show()
+                        #exit the system
+                        sys.exit()
     #if choice_of_hide == "image" or "photo":
 
 
