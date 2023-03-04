@@ -35,7 +35,7 @@ def shrink(image,question_identity):
 def hide(image,question_identity):
     #gets width and height based on image we give
     width, height = image.size
-    #creates a blank new image
+    #creates 2 blank new images, 1 for hiding a message and 1 for hiding an image
     #(the RGB tells it it's in RGB format(in color basically),
     #the image size tells it it's the same image size as the original image,
     # the white tells it the image is pure white before we put the pixels)
@@ -55,7 +55,7 @@ def hide(image,question_identity):
             for y in range(height):
                 #gets the character for that pixel(width and height)
                 for character in split_message:
-                    #gets the RGB vales of that pixel
+                    #gets the RGB values of that pixel
                     r,g,b = image.getpixel((x,y))
                     #makes the R value of RGB into binary and only keeps the first 4 which hold the most value in binary(As the first 4 values are the largest numbers in binary)
                     r = (bin(r)[2:6])
@@ -91,34 +91,63 @@ def hide(image,question_identity):
                         #exit the system
                         sys.exit()
     if choice_of_hide == "image" or "photo":
+        #it will ask for an image to hide and show them a list of images to choose from
         print("What is your secret image/photo?")
         print("Choices are:\nhorse.jpg\nbuster.png\nhyena.jpg\nkitty.png\nlatestart.jpg\nnightbee.png\nowlbear.jpg\nphilip.jpg\nthanksgiving.jpg")
         secret_image = input("What is your secret image/photo?(Choose from the list)\n")
         image2 = Image.open(secret_image)
+        #it will show them the image they chose
+        print("This is your image:")
+        time.sleep(2)
         image2.show()
+        time.sleep(2)
+        #it will get the width and height of the image we are trying to hide
         width2, height2 = image2.size
+        #gets the width of the image we're hiding an image in
         for x in range(width):
+            #gets the height of the image we're hiding an image in
             for y in range(height):
+                #gets the width of the image we're hiding
                 for x2 in range(width2):
+                    #gets the height of the image we're hiding
                     for y2 in range(height2):
+                        #gets the RGB values of the pixel of the image that's being used to hide an image
                         r,g,b = image.getpixel((x,y))
+                        #gets the RGB values of the pixel of the image that we're hiding
                         r2,g2,b2 = image2.getpixel((x2,y2))
+                        #makes the R value of the RGB of the original image(the one being used for hiding) into binary and only keeps the first 4 which hold the most value in binary(As the first 4 values are the largest numbers in binary)
                         r = (bin(r)[2:6])
+                        #makes the G value of RGB into binary and only keeps the first 4
                         g = (bin(g)[2:6])
+                        #makes the B value of RGB into binary and only keeps the first 4
                         b = (bin(b)[2:6])
+                        #makes the R value of the RGB of the image we're trying to hide into binary and only keeps the first 4
                         r2 = (bin(r2)[2:6])
+                        #makes the G value of RGB into binary and only keeps the first 4
                         g2 = (bin(g2)[2:6])
+                        #makes the B value of RGB into binary and only keeps the first 4
                         b2 = (bin(b2)[2:6])
+                        #add the first 4 binary values of R in RGB in the image we're trying to hide to the binary values of R in RGB in the original image(as we have 4 left after keeping only the first 4 values)
                         hidden_r = int(r + r2)
+                        #add the first 4 binary values of G in RGB in the image we're trying to hide to the binary values of G in RGB in the original image
                         hidden_g = int(g + g2)
+                        #add the first 4 binary values of B in RGB in the image we're trying to hide to the binary values of B in RGB in the original image
                         hidden_b = int(b + b2)
+                        #place the new RGB values in the new image in the same position
                         new_image_3.putpixel((x,y), (hidden_r,hidden_g,hidden_b))
+                        #if we reach the end of the width and height of the image we're trying to hide(which is -1 for both)
                         if str(x2) == (str(width2)[-1]) and str(y2) == (str(height2)[-1]):
+                            #get the width of the original image
                             for x in range(width):
+                                #get the height of the original image
                                 for y in range(height):
+                                    #get the RGB value of that pixel in the original image(width and heigh)
                                     r,g,b = image.getpixel((x,y))
+                                    #place those RGB values in the same position in the new image
                                     new_image_3.putpixel((x,y), (r,g,b))
+                            #print/show the new image
                             new_image_3.show()
+                            #exit the system
                             sys.exit()
 
 
